@@ -26,7 +26,7 @@ def cleanText(readData):
 
 df['comments_KO'] = df['comments_KO'].apply(cleanText)
 
-#개별 국문 제거dd
+#개별 국문 제거
 def cleanText2(readData):
  
     text = re.sub('[ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎㅃㅉㄸㄲㅆㅛㅕㅑㅐㅔㅗㅓㅏㅣㅜㅠㅡ]', '', readData)
