@@ -1,1 +1,48 @@
+import pandas as pd
 
+#데이터 불러오기
+#파일 위치는 각자 컴퓨터 위치로
+path = r"C:\Users\82106\Desktop/리뷰한글번역후_xlsx"
+df = pd.read_excel(path)
+df
+
+#필요한 열만 추출 "comments_KO"는 영문리뷰->국문 으로 바꾼 열 
+#숙소 id, 고객id, 고객명, 한글리뷰
+df = df.loc[:, ["list_id", "reviewer_id","reviewer_name","comments_KO"]]
+df
+
+
+#개행문자 제거
+# \n(개행문자) -> ""(공백)
+df['comments_KO'] = df['comments_KO'].apply(lambda x: x.replace('\n',''))
+
+#특수문자 제거
+import re
+def cleanText(readData):
+ 
+    
+    text = re.sub('[-=+,#/\?:;^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》❤]', '', readData)
+    return text
+
+df['comments_KO'] = df['comments_KO'].apply(cleanText)
+
+#개별 국문 제거
+def cleanText2(readData):
+ 
+    text = re.sub('[ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎㅃㅉㄸㄲㅆㅛㅕㅑㅐㅔㅗㅓㅏㅣㅜㅠㅡ]', '', readData)
+    return text
+df['comments_KO'] = df['comments_KO'].apply(cleanText2)
+
+
+#알파벳 제거 (불어, 기타 외국어 제거)
+def cleanText3(readData):
+ 
+    text = re.sub('[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]', '', readData)
+    return text
+df['comments_KO'] = df['comments_KO'].apply(cleanText3)
+
+#리뷰 결측치 제거
+df = df.dropna()
+
+#전처리 후 데이터 확인
+df.info()
