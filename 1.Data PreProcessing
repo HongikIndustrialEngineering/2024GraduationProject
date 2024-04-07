@@ -1,5 +1,0 @@
-#데이터 불러오기
-
-path = r"C:\Users\82106\Desktop/리뷰.csv"
-df = pd.read_csv(path)
-df
