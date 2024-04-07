@@ -2,7 +2,7 @@ import pandas as pd
 
 #데이터 불러오기
 #파일 위치는 각자 컴퓨터 위치로
-path = r"C:\Users\82106\Desktop/리뷰한글번역후_xlsx"
+path = r"C:\Users\82106\Desktop/reviews_KO.xlsx"
 df = pd.read_excel(path)
 df
 
